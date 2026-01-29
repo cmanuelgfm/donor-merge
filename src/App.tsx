@@ -1,29 +1,23 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { Layout } from './components/Layout';
-import DashboardPage from './pages/DashboardPage';
-import SupportersListPage from './pages/SupportersListPage';
-import SupporterDetailPage from './pages/SupporterDetailPage';
-import DuplicatesQueuePage from './pages/DuplicatesQueuePage';
-import MergeWizardPage from './pages/MergeWizardPage';
-import MergeHistoryPage from './pages/MergeHistoryPage';
-import PlaceholderPage from './pages/PlaceholderPage';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
+import SupportersList from './pages/SupportersList';
+import SupporterDetail from './pages/SupporterDetail';
+import DuplicatesQueue from './pages/DuplicatesQueue';
+import MergeWizard from './pages/MergeWizard';
+import MergeHistory from './pages/MergeHistory';
 
 const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/supporters" element={<SupportersListPage />} />
-        <Route path="/supporters/duplicates" element={<DuplicatesQueuePage />} />
-        <Route path="/supporters/merge-history" element={<MergeHistoryPage />} />
-        <Route path="/supporters/merge/:candidateId" element={<MergeWizardPage />} />
-        <Route path="/supporters/:id" element={<SupporterDetailPage />} />
-        <Route path="/transactions" element={<PlaceholderPage title="Transactions" />} />
-        <Route path="/fundraising" element={<PlaceholderPage title="Fundraising" />} />
-        <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
-        <Route path="/administration" element={<PlaceholderPage title="Administration" />} />
-        <Route path="*" element={<PlaceholderPage title="Not Found" />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/supporters" element={<SupportersList />} />
+        <Route path="/supporters/duplicates" element={<DuplicatesQueue />} />
+        <Route path="/supporters/merge-history" element={<MergeHistory />} />
+        <Route path="/supporters/merge/:candidateId" element={<MergeWizard />} />
+        <Route path="/supporters/:id" element={<SupporterDetail />} />
       </Routes>
     </Layout>
   );

@@ -1,31 +1,29 @@
-# GoFundMe Pro – Ideal Supporter Merge Prototype
+# GoFundMe Pro - Ideal Supporter Merge Prototype
 
-This is a high-fidelity prototype of the “Ideal Supporter (Donor) Merge” workflow inside the GoFundMe Pro admin surface.
+This is a demo-ready React + TypeScript prototype for an “Ideal Supporter (Donor) Merge” workflow inside the GoFundMe Pro admin surface.
 
-## Setup
+## Features
+- Dashboard notification for duplicate supporters.
+- Supporters list, supporter detail, and duplicates queue.
+- Merge wizard with previews, guardrails, and validations.
+- Merge history audit log.
+- Mock API with localStorage persistence.
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-## What’s included
+The app runs locally using Vite. All data is stored in `localStorage`, so refreshes will keep your merge changes.
 
-- React + TypeScript app (Vite)
-- React Router navigation with GoFundMe Pro styled shell
-- In-memory mock data persisted to localStorage
-- Merge queue, merge wizard, and merge audit history
-- Analytics instrumentation stubs (console + in-memory)
+## Project Structure
+- `src/data/seed.ts` – Seed data for supporters, duplicates, and related entities.
+- `src/data/mockApi.ts` – Mock API layer with localStorage persistence.
+- `src/pages` – Dashboard, supporters list, duplicates queue, merge wizard, and history pages.
+- `src/components` – Layout shell with navigation and top header.
 
-## Key routes
-
-- `/dashboard` – admin dashboard with duplicate notification card
-- `/supporters` – supporters list (includes “Duplicates” pill)
-- `/supporters/duplicates` – duplicates queue
-- `/supporters/merge/:candidateId` – merge wizard
-- `/supporters/merge-history` – merge audit history
-- `/supporters/:id` – supporter detail
-
-## Resetting the data
-
-Delete localStorage key `gfp-merge-prototype-data` in the browser to restore seed data.
+## Notes
+- This is a prototype. No backend services are required.
+- Analytics events are logged to the console and stored in-memory.

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { ReactNode } from 'react';
-import './layout.css';
+import { mockApi } from '../data/mockApi';
 
 const navItems = [
   { label: 'Home', to: '/dashboard' },
@@ -11,35 +11,48 @@ const navItems = [
   { label: 'Administration', to: '/administration' }
 ];
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
+  const summary = mockApi.getDashboardSummary();
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div className="sidebar__logo">gofundmePRO</div>
-        <nav>
+        <div className="logo">gofundme<span>pro</span></div>
+        <nav className="nav">
           {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className="nav-link">
+            <NavLink key={item.label} to={item.to} className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
               {item.label}
             </NavLink>
           ))}
         </nav>
-        <div className="sidebar__footer">Give us your feedback</div>
       </aside>
       <div className="main">
         <header className="topbar">
-          <div>
-            <span className="pill pill--info">Time zone: America/Los_Angeles</span>
+          <div className="topbar-left">
+            <span className="timezone">Time & dates displayed in America/Los_Angeles</span>
           </div>
-          <div className="topbar__user">
-            <span className="avatar">CM</span>
-            <div>
-              <div className="topbar__name">Colin Manuel</div>
-              <div className="topbar__org">Campaign Studio Testing</div>
+          <div className="topbar-right">
+            <div className="pill">Help</div>
+            <div className="user">
+              <div className="avatar">CM</div>
+              <div>
+                <div className="user-name">Colin Manuel</div>
+                <div className="user-subtitle">Campaign Studio Testing</div>
+              </div>
             </div>
           </div>
         </header>
-        <main className="content">{children}</main>
+        <main className="content">
+          <div className="breadcrumb">
+            <span>Supporter Admin</span>
+            <span className="dot" />
+            <span className="muted">Open duplicates: {summary.duplicatesCount}</span>
+          </div>
+          {children}
+        </main>
       </div>
     </div>
   );
 };
+
+export default Layout;

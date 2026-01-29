@@ -1,13 +1,3 @@
-export type CommunicationPrefs = {
-  optIn: boolean;
-};
-
-export type SupporterFlags = {
-  isHighValue?: boolean;
-  isDoNotMerge?: boolean;
-  isMultiOrg?: boolean;
-};
-
 export type Supporter = {
   id: string;
   firstName: string;
@@ -15,11 +5,24 @@ export type Supporter = {
   email: string;
   phone: string;
   address: string;
-  communicationPrefs: CommunicationPrefs;
+  communicationPrefs: {
+    optIn: boolean;
+  };
   createdAt: string;
   updatedAt: string;
   orgId: string;
-  flags: SupporterFlags;
+  flags: {
+    isHighValue: boolean;
+    isDoNotMerge: boolean;
+    isMultiOrg: boolean;
+  };
+  transactionsCount: number;
+  transactionsTotal: number;
+  recurringPlansCount: number;
+  recurringTotal: number;
+  fundraisingPagesCount: number;
+  fundraisingTotal: number;
+  status: 'Active' | 'Merged';
   mergedIntoId?: string;
 };
 
@@ -37,7 +40,7 @@ export type RecurringPlan = {
   supporterId: string;
   amount: number;
   frequency: string;
-  status: 'Active' | 'Paused' | 'Cancelled';
+  status: 'Active' | 'Paused' | 'Canceled';
   totalDonated: number;
   createdAt: string;
 };
@@ -47,7 +50,7 @@ export type FundraisingPage = {
   supporterId: string;
   name: string;
   campaignTeam: string;
-  status: 'Active' | 'Inactive' | 'Closed';
+  status: 'Active' | 'Closed';
   totalRaised: number;
   createdAt: string;
 };
@@ -82,19 +85,6 @@ export type MergeAudit = {
   dryRunSummary: string;
 };
 
-export type AnalyticsEvent = {
-  id: string;
-  name:
-    | 'duplicates_queue_viewed'
-    | 'duplicate_review_opened'
-    | 'merge_dry_run_viewed'
-    | 'merge_confirmed'
-    | 'merge_blocked'
-    | 'merge_dismissed';
-  createdAt: string;
-  payload?: Record<string, unknown>;
-};
-
 export type AppData = {
   supporters: Supporter[];
   transactions: Transaction[];
@@ -102,5 +92,5 @@ export type AppData = {
   fundraisingPages: FundraisingPage[];
   duplicateCandidates: DuplicateCandidate[];
   mergeAudits: MergeAudit[];
-  analyticsEvents: AnalyticsEvent[];
+  analyticsEvents: { name: string; payload?: Record<string, unknown>; createdAt: string }[];
 };
